@@ -12,7 +12,7 @@
         app:layout_constraintBottom_toBottomOf="@id/guide"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></androidx.viewpager2.widget.ViewPager2>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guide"
@@ -32,7 +32,8 @@
         android:rotationY="180"
         android:src="@drawable/ic_arrow"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/guide" />
+        app:layout_constraintTop_toTopOf="@id/guide"
+        android:contentDescription="TODO" />
 
     <ImageView
         android:id="@+id/ivLeft"
@@ -42,7 +43,8 @@
         android:layout_marginTop="10dp"
         android:src="@drawable/ic_arrow"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/guide" />
+        app:layout_constraintTop_toTopOf="@id/guide"
+        android:contentDescription="TODO" />
 
     <com.tbuonomo.viewpagerdotsindicator.SpringDotsIndicator
         android:id="@+id/spring_dots_indicator"

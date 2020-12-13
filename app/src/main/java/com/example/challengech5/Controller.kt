@@ -3,7 +3,7 @@ package com.example.challengech5
 import com.example.challengech5.listener.CallbackResult
 import com.example.challengech5.model.Suit
 
-class Controller(var viewSuit: CallbackResult) {
+class Controller(private var viewSuit: CallbackResult) {
 
     fun evaluate(suit: Suit) {
         //player 1 win

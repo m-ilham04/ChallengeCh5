@@ -46,7 +46,7 @@ class MenuActivity : AppCompatActivity() {
 
         val tvSnackbar = snackbar.view.findViewById<TextView>(R.id.snackbar_text)
         tvSnackbar.setTypeface(resources.getFont(R.font.comic_sans_ms), Typeface.BOLD)
-        tvSnackbar.setTextSize(20f)
+        tvSnackbar.textSize = 20f
 
         snackbar.show()
 

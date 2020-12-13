@@ -21,7 +21,7 @@ class LandingPageFragment(private val pos: Int, val listener: (CharSequence?) ->
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_landing_page, container, false)
+    ): View? = inflater.inflate(R.layout.fragment_landing_page, container, false)
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

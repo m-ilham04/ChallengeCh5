@@ -25,12 +25,15 @@ class SuitGameActivity : AppCompatActivity(), DataListener, CallbackResult {
     private lateinit var pickerPlayer2: PickerFragment
     private lateinit var reset: ImageView
     private lateinit var close: ImageView
+    private lateinit var handler: Handler
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_suit_game)
 
         suit = intent.getParcelableExtra<Suit>("Game") as Suit
+
+        handler = Handler(Looper.getMainLooper())
 
         val hdIcon = findViewById<ImageView>(R.id.ivHeader)
         Glide.with(this).load(this.resources.getString(R.string.header_url)).into(hdIcon)
@@ -43,12 +46,17 @@ class SuitGameActivity : AppCompatActivity(), DataListener, CallbackResult {
         pickerPlayer2 = PickerFragment(suit.player2)
         ftPlayer2.add(R.id.frameP2, pickerPlayer2).commit()
 
-        reset = findViewById<ImageView>(R.id.ivReset)
-        close = findViewById<ImageView>(R.id.ivClose)
+        reset = findViewById(R.id.ivReset)
+        close = findViewById(R.id.ivClose)
 
         reset.setOnClickListener { reset() }
         close.setOnClickListener { finish() }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        handler.removeCallbacksAndMessages(null)
     }
 
     override fun setOnDataReady(player: Player): Boolean {
@@ -60,6 +68,7 @@ class SuitGameActivity : AppCompatActivity(), DataListener, CallbackResult {
                 "${suit.player1.name} memilih ${player.picked}",
                 Toast.LENGTH_SHORT
             ).show()
+            if (suit.type == "CPU") pickerPlayer2.cpuStartPicking()
             playerCount += 1
             if (playerCount == 2) {
                 Controller(this).evaluate(suit)
@@ -88,18 +97,23 @@ class SuitGameActivity : AppCompatActivity(), DataListener, CallbackResult {
         this.suit = suit
         pickerPlayer1.setFinishedState(true)
         pickerPlayer2.setFinishedState(true)
-        if (suit.type == "CPU") Toast.makeText(
+        if (suit.type != "CPU") showDialog(this.suit.winner)
+    }
+
+    override fun setResultOnCPUFinished() {
+        Toast.makeText(
             this,
             "CPU memilih ${this.suit.player2.picked}",
             Toast.LENGTH_SHORT
         ).show()
-        val resultDialog = ResultDialogFragment(this.suit.winner)
+        showDialog(this.suit.winner)
+    }
 
-        val handler = Handler(Looper.getMainLooper())
-        handler.postDelayed(Runnable {
+    private fun showDialog(string: String){
+        handler.postDelayed({
+            val resultDialog = ResultDialogFragment(string)
             resultDialog.show(supportFragmentManager, null)
         }, 2000)
-
     }
 
     fun reset() {

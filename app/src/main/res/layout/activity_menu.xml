@@ -2,11 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/menuActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MenuActivity"
-    android:id="@+id/menuActivity"
-    >
+    tools:context=".MenuActivity">
 
 
     <TextView
@@ -14,14 +13,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
+        android:fontFamily="@font/comic_sans_ms"
         android:text="PILIH LAWANMU"
         android:textColor="@color/black"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:fontFamily="@font/comic_sans_ms"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <ImageView
@@ -40,13 +38,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:fontFamily="@font/comic_sans_ms"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ivVsPlayer"
-        android:fontFamily="@font/comic_sans_ms"
-        />
+        app:layout_constraintTop_toBottomOf="@id/ivVsPlayer" />
 
 
     <ImageView
@@ -57,8 +54,7 @@
         android:src="@drawable/ic_landing_page2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvVsPlayer"
-        />
+        app:layout_constraintTop_toBottomOf="@id/tvVsPlayer" />
 
     <TextView
         android:id="@+id/tvVsCPU"
@@ -66,12 +62,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:clickable="true"
+        android:fontFamily="@font/comic_sans_ms"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ivVsCPU"
-        android:fontFamily="@font/comic_sans_ms"
-        />
+        app:layout_constraintTop_toBottomOf="@id/ivVsCPU" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

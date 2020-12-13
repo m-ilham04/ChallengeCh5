@@ -21,7 +21,7 @@ class SplashScreenActivity : AppCompatActivity() {
 
         val handler = Handler(Looper.getMainLooper())
         handler.postDelayed(
-            Runnable {
+            {
                 this.finish()
                 startActivity(intentLandingPages)
             }, 3000
