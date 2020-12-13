@@ -90,7 +90,7 @@ class PickerFragment(private var player: Player) : Fragment() {
         handler.removeCallbacksAndMessages(null)
     }
 
-    fun setFinishedState(value: Boolean) {
+    fun setFinishedState() {
         if (player.name == "CPU" && player.playerNo == 2) {
             
             handler.postDelayed({

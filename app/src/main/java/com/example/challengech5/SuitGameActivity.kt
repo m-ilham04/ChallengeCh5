@@ -95,8 +95,8 @@ class SuitGameActivity : AppCompatActivity(), DataListener, CallbackResult {
 
     override fun result(suit: Suit) {
         this.suit = suit
-        pickerPlayer1.setFinishedState(true)
-        pickerPlayer2.setFinishedState(true)
+        pickerPlayer1.setFinishedState()
+        pickerPlayer2.setFinishedState()
         if (suit.type != "CPU") showDialog(this.suit.winner)
     }
 
