@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -8,7 +9,7 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "com.example.cobaviewpager"
+        applicationId "com.example.challengech5"
         minSdkVersion 28
         targetSdkVersion 30
         versionCode 1
@@ -46,4 +47,9 @@ dependencies {
 
     implementation 'androidx.viewpager2:viewpager2:1.0.0-alpha01'
     compileOnly 'com.google.android.wearable:wearable:2.8.1'
+
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
+    implementation 'com.tbuonomo.andrui:viewpagerdotsindicator:4.1.2'
 }

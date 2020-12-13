@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tvPlayer"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/comic_sans_ms"
+        android:textAlignment="center"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!--
+    <ImageView
+        android:id="@+id/ivBgRock"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:clickable="true"
+        android:src="@drawable/bg_picked"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@id/tvPlayer"
+        app:layout_constraintTop_toBottomOf="@id/tvPlayer" />-->
+
+    <ImageView
+        android:id="@+id/ivRock"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_rock"
+        app:layout_constraintStart_toStartOf="@id/tvPlayer"
+        app:layout_constraintTop_toBottomOf="@id/tvPlayer"
+        android:clickable="true"
+        />
+
+    <!--
+    <ImageView
+        android:id="@+id/ivBgPaper"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:clickable="true"
+        android:src="@drawable/bg_picked"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@id/ivRock"
+        app:layout_constraintTop_toBottomOf="@id/ivRock" />-->
+
+    <ImageView
+        android:id="@+id/ivPaper"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_paper"
+        app:layout_constraintStart_toStartOf="@id/ivRock"
+        app:layout_constraintTop_toBottomOf="@id/ivRock"
+        android:clickable="true"
+        />
+
+    <!--
+    <ImageView
+        android:id="@+id/ivBgScissor"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:clickable="true"
+        android:src="@drawable/bg_picked"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@id/ivPaper"
+        app:layout_constraintTop_toBottomOf="@id/ivPaper" />-->
+
+    <ImageView
+        android:id="@+id/ivScissor"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_scissor"
+        app:layout_constraintStart_toStartOf="@id/ivPaper"
+        app:layout_constraintTop_toBottomOf="@id/ivPaper"
+        android:background="@drawable/ic_rock"
+        android:clickable="true"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

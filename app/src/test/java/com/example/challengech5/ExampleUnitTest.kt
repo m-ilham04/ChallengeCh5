@@ -1,4 +1,4 @@
-package com.example.cobaviewpager
+package com.example.challengech5
 
 import org.junit.Test
 
