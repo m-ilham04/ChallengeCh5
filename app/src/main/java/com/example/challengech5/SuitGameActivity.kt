@@ -21,8 +21,10 @@ class SuitGameActivity : AppCompatActivity(), DataListener, CallbackResult {
     private var playerCount = 0
     private lateinit var ftPlayer1: FragmentTransaction
     private lateinit var ftPlayer2: FragmentTransaction
-    private lateinit var pickerPlayer1: PickerFragment
-    private lateinit var pickerPlayer2: PickerFragment
+    private lateinit var pickerPlayer1: PickerFragmentPlayer
+    private lateinit var pickerPlayer2: PickerFragmentPlayer
+    private lateinit var pickerCPU: PickerFragmentCPU
+
     private lateinit var reset: ImageView
     private lateinit var close: ImageView
     private lateinit var handler: Handler
@@ -39,24 +41,30 @@ class SuitGameActivity : AppCompatActivity(), DataListener, CallbackResult {
         Glide.with(this).load(this.resources.getString(R.string.header_url)).into(hdIcon)
 
         ftPlayer1 = supportFragmentManager.beginTransaction()
-        pickerPlayer1 = PickerFragment(suit.player1)
+        pickerPlayer1 = PickerFragmentPlayer(suit.player1,suit.type)
         ftPlayer1.add(R.id.frameP1, pickerPlayer1).commit()
 
         ftPlayer2 = supportFragmentManager.beginTransaction()
-        pickerPlayer2 = PickerFragment(suit.player2)
-        ftPlayer2.add(R.id.frameP2, pickerPlayer2).commit()
+
+        when (suit.type) {
+            "PVP" -> {
+                pickerPlayer2 = PickerFragmentPlayer(suit.player2,suit.type)
+                ftPlayer2.add(R.id.frameP2, pickerPlayer2)
+                    .commit()
+            }
+            "CPU" -> {
+                pickerCPU = PickerFragmentCPU(suit.player2)
+                ftPlayer2.add(R.id.frameP2, pickerCPU)
+                    .commit()
+            }
+        }
 
         reset = findViewById(R.id.ivReset)
         close = findViewById(R.id.ivClose)
 
-        reset.setOnClickListener { reset() }
-        close.setOnClickListener { finish() }
+        reset.setOnClickListener() { reset() }
+        close.setOnClickListener() { finish() }
 
-    }
-
-    override fun onResume() {
-        super.onResume()
-        handler.removeCallbacksAndMessages(null)
     }
 
     override fun setOnDataReady(player: Player): Boolean {
@@ -68,15 +76,18 @@ class SuitGameActivity : AppCompatActivity(), DataListener, CallbackResult {
                 "${suit.player1.name} memilih ${player.picked}",
                 Toast.LENGTH_SHORT
             ).show()
-            if (suit.type == "CPU") pickerPlayer2.cpuStartPicking()
+
+            if(suit.type =="CPU") pickerCPU.animateAndSet()
+
             playerCount += 1
             if (playerCount == 2) {
                 Controller(this).evaluate(suit)
                 isSecondPicker = true
             }
+
         } else if (player.playerNo == 2 && player.picked != "") {
             suit.player2.picked = player.picked
-            if (suit.type != "CPU") Toast.makeText(
+            Toast.makeText(
                 this,
                 "${suit.player2.name} memilih ${player.picked}",
                 Toast.LENGTH_SHORT
@@ -86,30 +97,27 @@ class SuitGameActivity : AppCompatActivity(), DataListener, CallbackResult {
                 Controller(this).evaluate(suit)
                 isSecondPicker = true
             }
-        } else {
-            reset()
-            isSecondPicker = false
         }
         return isSecondPicker
     }
 
     override fun result(suit: Suit) {
         this.suit = suit
+
         pickerPlayer1.setFinishedState()
-        pickerPlayer2.setFinishedState()
-        if (suit.type != "CPU") showDialog(this.suit.winner)
+
+        when (this.suit.type) {
+            "PVP" -> {
+                pickerPlayer2.setFinishedState()
+                showDialog(this.suit.winner)
+            }
+            "CPU" -> {
+                showDialog(this.suit.winner)
+            }
+        }
     }
 
-    override fun setResultOnCPUFinished() {
-        Toast.makeText(
-            this,
-            "CPU memilih ${this.suit.player2.picked}",
-            Toast.LENGTH_SHORT
-        ).show()
-        showDialog(this.suit.winner)
-    }
-
-    private fun showDialog(string: String){
+    private fun showDialog(string: String) {
         handler.postDelayed({
             val resultDialog = ResultDialogFragment(string)
             resultDialog.show(supportFragmentManager, null)
@@ -117,11 +125,18 @@ class SuitGameActivity : AppCompatActivity(), DataListener, CallbackResult {
     }
 
     fun reset() {
-        val intent = intent
-        overridePendingTransition(0, 0)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-        finish()
-        overridePendingTransition(0, 0)
-        startActivity(intent)
+        handler.removeCallbacksAndMessages(null)
+        playerCount = 0
+        suit = intent.getParcelableExtra<Suit>("Game") as Suit
+        pickerPlayer1.reset()
+
+        when (suit.type) {
+            "PVP" -> {
+                pickerPlayer2.reset()
+            }
+            "CPU" -> {
+                pickerCPU.reset()
+            }
+        }
     }
 }
